@@ -5,34 +5,139 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ο Μύθος της Φάλαινας της Κω</title>
     <style>
-        /* General Body Styling */
+        /* General Styling */
         body {
             margin: 0;
             font-family: 'Arial', sans-serif;
             line-height: 1.8;
-            background: linear-gradient(to bottom, #004e92, #000428);
+            background: linear-gradient(to bottom, #004e92, #000428); /* Ocean gradient */
             color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            text-align: center;
             overflow: hidden;
         }
 
-        /* Container Styling */
+        /* Animated Waves */
+        .waves {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 150px;
+            background: url('https://i.imgur.com/kTjJr2F.png') repeat-x; /* Wave pattern */
+            animation: waveAnimation 8s linear infinite;
+            opacity: 0.9;
+        }
+
+        @keyframes waveAnimation {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(-100%);
+            }
+        }
+
+        /* Kraken Tentacles */
+        .tentacle {
+            position: absolute;
+            bottom: 10%;
+            width: 100px;
+            height: 300px;
+            background: radial-gradient(circle, #003f5c, #001f33);
+            border-radius: 50%;
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.8);
+            animation: tentacleMove 6s ease-in-out infinite;
+        }
+
+        .tentacle::after {
+            content: "";
+            position: absolute;
+            bottom: -50px;
+            left: 20px;
+            width: 60px;
+            height: 150px;
+            background: linear-gradient(to bottom, #002f4f, #000820);
+            border-radius: 50%;
+        }
+
+        .tentacle:nth-child(1) {
+            left: 10%;
+            animation-delay: 0.5s;
+        }
+
+        .tentacle:nth-child(2) {
+            left: 30%;
+            animation-delay: 1s;
+        }
+
+        .tentacle:nth-child(3) {
+            left: 50%;
+            animation-delay: 1.5s;
+        }
+
+        .tentacle:nth-child(4) {
+            left: 70%;
+            animation-delay: 2s;
+        }
+
+        .tentacle:nth-child(5) {
+            left: 90%;
+            animation-delay: 2.5s;
+        }
+
+        @keyframes tentacleMove {
+            0%, 100% {
+                transform: rotate(0deg);
+            }
+            50% {
+                transform: rotate(-10deg);
+            }
+        }
+
+        /* Floating Ships */
+        .ship {
+            position: absolute;
+            width: 120px;
+            height: 60px;
+            background: url('https://i.imgur.com/QqyrmyR.png') no-repeat;
+            background-size: contain;
+            animation: shipFloat 4s ease-in-out infinite;
+        }
+
+        .ship:nth-child(1) {
+            top: 10%;
+            left: 20%;
+            animation-delay: 0s;
+        }
+
+        .ship:nth-child(2) {
+            top: 15%;
+            left: 60%;
+            animation-delay: 1s;
+        }
+
+        @keyframes shipFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Content Box */
         .container {
-            background: rgba(0, 0, 0, 0.6);
+            position: relative;
+            background: rgba(0, 0, 0, 0.7);
+            margin: 5% auto;
             padding: 20px;
             border-radius: 10px;
             max-width: 800px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
         }
 
         h1 {
-            margin-top: 0;
-            color: #ffd700;
             font-size: 2.8em;
+            color: #ffd700;
         }
 
         p {
@@ -45,65 +150,12 @@
             font-size: 1.1em;
             color: #ccc;
         }
-
-        /* Kraken Tentacle Styling */
-        .tentacle {
-            position: absolute;
-            bottom: -150px;
-            width: 150px;
-            height: 300px;
-            background: linear-gradient(to bottom, #006994, #003f5c);
-            border-radius: 50%;
-            animation: wave 4s ease-in-out infinite;
-        }
-
-        .tentacle::before {
-            content: "";
-            position: absolute;
-            bottom: -50px;
-            left: 30px;
-            width: 60px;
-            height: 150px;
-            background: linear-gradient(to bottom, #005075, #002f3f);
-            border-radius: 50%;
-        }
-
-        .tentacle:nth-child(1) {
-            left: 10%;
-            animation-delay: 0s;
-        }
-
-        .tentacle:nth-child(2) {
-            left: 30%;
-            animation-delay: 0.5s;
-        }
-
-        .tentacle:nth-child(3) {
-            left: 50%;
-            animation-delay: 1s;
-        }
-
-        .tentacle:nth-child(4) {
-            left: 70%;
-            animation-delay: 1.5s;
-        }
-
-        .tentacle:nth-child(5) {
-            left: 90%;
-            animation-delay: 2s;
-        }
-
-        @keyframes wave {
-            0%, 100% {
-                transform: translateY(0) rotate(0deg);
-            }
-            50% {
-                transform: translateY(-20px) rotate(-5deg);
-            }
-        }
     </style>
 </head>
 <body>
+    <!-- Waves -->
+    <div class="waves"></div>
+
     <!-- Kraken Tentacles -->
     <div class="tentacle"></div>
     <div class="tentacle"></div>
@@ -111,7 +163,11 @@
     <div class="tentacle"></div>
     <div class="tentacle"></div>
 
-    <!-- Content Container -->
+    <!-- Floating Ships -->
+    <div class="ship"></div>
+    <div class="ship"></div>
+
+    <!-- Story Content -->
     <div class="container">
         <h1>Ο Μύθος της Φάλαινας της Κω</h1>
         <p>
